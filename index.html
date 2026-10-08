@@ -1,230 +1,83 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Great Dormass | Digital School Portal</title>
-  <meta name="description" content="Great Dormass Digital School Portal — academics, digital library, school life, admissions, news and media.">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Great Dormass Student Website — Justice AI</title>
+<style>
+:root{--green:#0b5d3b;--green2:#0f7a4d;--gold:#d8a83e;--bg:#06140f;--panel:#0b2118;--text:#f4f7f4;--muted:#a8b8af;--line:#234536}
+*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:Inter,system-ui,Arial;background:linear-gradient(135deg,#04110c,#092319);color:var(--text)}
+body{overflow:hidden}.app{height:100dvh;display:flex;flex-direction:column}
+.top{height:68px;flex:0 0 68px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid var(--line);background:#06170fdd;backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:42px;height:42px;border-radius:12px;background:var(--green);display:grid;place-items:center;font-weight:900;color:#fff}.brand b{display:block}.brand small{color:var(--gold)}
+.profile{border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:#0b2017}
+.main{flex:1;min-height:0;display:grid;grid-template-columns:230px 1fr}
+.side{padding:18px;border-right:1px solid var(--line);background:#06170f}
+.nav{display:grid;gap:8px}.nav button{border:1px solid transparent;background:transparent;color:#dbe7df;text-align:left;padding:12px;border-radius:12px;cursor:pointer}.nav button:hover,.nav button.active{background:#0d2e21;border-color:#275740}
+.content{position:relative;overflow:hidden}.screen{height:100%;overflow:auto;padding:28px;display:none}.screen.active{display:block}
+.hero{max-width:900px;margin:auto;padding-top:7vh}.hero h1{font-size:clamp(38px,6vw,70px);margin:10px 0}.hero span{color:var(--gold)}.hero p{color:var(--muted);font-size:18px;line-height:1.7}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:25px}.card{background:linear-gradient(180deg,#0d2b20,#081a13);border:1px solid var(--line);border-radius:18px;padding:18px}
+.ai-fab{position:fixed;right:22px;bottom:22px;width:76px;height:76px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--gold),#fff0a5,var(--green2));border:0;box-shadow:0 12px 40px #0009;cursor:pointer;z-index:30}.ai-fab img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%}.ai-fab:after{content:"";position:absolute;right:4px;bottom:5px;width:14px;height:14px;border-radius:50%;background:#20d27a;border:3px solid #082016}
+.login{position:fixed;inset:0;background:#02100bcc;backdrop-filter:blur(14px);z-index:50;display:grid;place-items:center;padding:20px}.login-card{width:min(440px,100%);background:#0a2118;border:1px solid #2a6047;border-radius:24px;padding:28px;box-shadow:0 30px 100px #0009}.login-card h2{margin-top:0}.login-card input{width:100%;padding:14px;border-radius:12px;border:1px solid #315542;background:#06150f;color:#fff;margin:8px 0 14px}.btn{border:0;border-radius:12px;padding:13px 16px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(135deg,#e8c55d,#b98220);color:#171006;width:100%}.muted{color:var(--muted);font-size:13px}
+
+.chat{position:fixed;inset:0;background:#04120d;z-index:40;display:none;flex-direction:column}.chat.open{display:flex}.chat-head{height:70px;flex:0 0 70px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:10px 16px;background:#071b13}.chat-head img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--gold)}.chat-title{flex:1}.chat-title b{display:block}.online{font-size:11px;color:#45dc8c}.icon-btn{background:#10291e;border:1px solid var(--line);color:#fff;border-radius:10px;padding:10px;cursor:pointer}
+.messages{flex:1;overflow:auto;padding:24px;display:flex;flex-direction:column;gap:14px;max-width:950px;width:100%;margin:auto}.msg{max-width:min(760px,85%);padding:13px 15px;border-radius:16px;line-height:1.55;white-space:pre-wrap}.ai{align-self:flex-start;background:#10291e;border:1px solid #214b39}.me{align-self:flex-end;background:#14643f}.composer{padding:14px;border-top:1px solid var(--line);background:#06170f}.composer-inner{max-width:950px;margin:auto;display:flex;gap:8px;align-items:end}.composer textarea{flex:1;min-height:52px;max-height:140px;resize:none;background:#091c14;color:#fff;border:1px solid #2a4e3d;border-radius:16px;padding:14px;font:inherit}.send{background:var(--gold);color:#181105;border:0;border-radius:14px;padding:14px 17px;font-weight:900;cursor:pointer}.voice.on{background:#a52c2c}.gallery{display:none}.history{display:none;position:absolute;left:0;top:70px;bottom:0;width:300px;background:#071a12;border-right:1px solid var(--line);z-index:3;padding:15px;overflow:auto}.history.open{display:block}.history-item{padding:11px;border-radius:10px;background:#0b2419;margin-bottom:8px;cursor:pointer;color:#dbe7df;font-size:13px}.history-item button{float:right;background:none;border:0;color:#aaa;cursor:pointer}
+@media(max-width:800px){.main{grid-template-columns:1fr}.side{display:none}.screen{padding:20px}.cards{grid-template-columns:1fr}.ai-fab{width:66px;height:66px;right:15px;bottom:15px}.chat .messages{padding:15px}.history{width:85%}}
+</style>
 </head>
 <body>
-<header class="topbar">
-  <div class="container nav">
-    <a class="brand" href="#home">
-      <img src="https://sis.uniflowtechnologies.com/school_logos/20231114042440.png" alt="Dormaa Senior High School logo">
-      <span><b>GREAT DORMASS</b><small>Knowledge is Power</small></span>
-    </a>
-    <button class="menu" aria-label="Open menu">☰</button>
-    <nav class="screen-nav">
-      <button data-screen="home">Home</button>
-      <button data-screen="about">About</button>
-      <button data-screen="academics">Academics</button>
-      <button data-screen="library">Library</button>
-      <button data-screen="media">Media</button>
-      <button data-screen="admissions">Admissions</button>
-      <button data-screen="contact">Contact</button>
-      <button class="profile-nav" data-screen="profile">My Profile</button>
-      <button class="login-btn" id="loginOpen">Student Login</button>
-    </nav>
-  </div>
-</header>
-
-<main>
-<section id="home" class="hero">
-  <div class="hero-overlay"></div>
-  <div class="container hero-content">
-    <div class="eyebrow">DORMAA SENIOR HIGH SCHOOL • DORMASS</div>
-    <h1>Welcome to <span>Great Dormass</span></h1>
-    <p>One digital home for our students, teachers, parents, old students and the wider Dormass family.</p>
-    <div class="actions">
-      <a class="btn primary" href="#library">Open Digital Library</a>
-      <a class="btn ghost" href="#media">School Gallery & Videos</a>
-    </div>
-    <div class="hero-note">Established 24 February 1947 • Dormaa Ahenkro, Bono Region, Ghana</div>
-  </div>
-</section>
-
-<section class="stats">
-  <div><strong>1947</strong><span>Established</span></div>
-  <div><strong>6</strong><span>Programmes</span></div>
-  <div><strong>6</strong><span>Houses</span></div>
-  <div><strong>4,000</strong><span>Students*</span></div>
-  <div><strong>210</strong><span>Staff*</span></div>
-</section>
-
-<section id="about" class="section">
-  <div class="container split">
-    <div>
-      <p class="eyebrow dark">ABOUT GREAT DORMASS</p>
-      <h2>A proud tradition of <span>knowledge, skill and character.</span></h2>
-      <p>Dormaa Senior High School, popularly known as DORMASS, began as Dormaa State College on 24 February 1947. The school was founded through the work of Joseph Manase Oppong and Samuel Kwadwo Yeboah.</p>
-      <p>The school’s published vision is to be the pacesetters for academic standards, growth and development, with a mission focused on equipping young people with knowledge, skills and the right attitude.</p>
-      <a class="text-link" href="https://www.dormaashs.com/about.php" target="_blank" rel="noopener">Read the official school history →</a>
-    </div>
-    <div class="quote-card">
-      <div class="crest">D</div>
-      <h3>Knowledge is Power</h3>
-      <p>“Dedicated to excellence and youth development.”</p>
-      <span>— Great Dormass</span>
-    </div>
-  </div>
-</section>
-
-<section id="academics" class="section alt">
-  <div class="container">
-    <p class="eyebrow dark">ACADEMICS</p>
-    <h2>Programmes & subjects</h2>
-    <p class="lead">The school currently lists six academic programmes. The library below also includes the core and curriculum-resource categories for SHS 1, 2 and 3.</p>
-    <div class="program-grid">
-      <article><b>General Arts</b><p>Geography • Government • Economics • Elective Maths • Asante Twi • French • Literature-in-English • CRS • History • Music</p></article>
-      <article><b>General Science</b><p>Chemistry • Physics • Elective Maths • Biology • Elective ICT</p></article>
-      <article><b>Business</b><p>Business Management • Financial Accounting • Cost Accounting • Elective Maths • Economics • Elective ICT</p></article>
-      <article><b>Agricultural Science</b><p>General Agric • Animal Husbandry • Chemistry • Physics</p></article>
-      <article><b>Home Economics</b><p>Biology • Management-in-Living • Economics • Foods & Nutrition • Clothing & Textiles</p></article>
-      <article><b>Visual Arts</b><p>General Knowledge in Arts • Graphic Design • Leather Works • Economics</p></article>
-    </div>
-  </div>
-</section>
-
-<section id="library" class="section library">
-  <div class="container">
-    <div class="library-head">
-      <div>
-        <p class="eyebrow">DIGITAL LIBRARY</p>
-        <h2>Books & learning materials</h2>
-        <p>Choose SHS 1, SHS 2 or SHS 3, then search by subject. Materials are connected to the official Ghana Ministry of Education Curriculum Resources Microsite.</p>
-      </div>
-      <a class="btn primary" href="https://curriculumresources.edu.gh/" target="_blank" rel="noopener">Open Official Microsite</a>
-    </div>
-
-    <div class="year-tabs" role="tablist">
-      <button class="year active" data-year="1">SHS 1</button>
-      <button class="year" data-year="2">SHS 2</button>
-      <button class="year" data-year="3">SHS 3</button>
-      <button class="year" data-year="general">General / Library</button>
-    </div>
-    <input id="bookSearch" class="search" type="search" placeholder="Search a subject or resource…">
-    <div id="books" class="book-grid"></div>
-
-    <div class="notice">
-      <b>Important:</b> This portal points students to official/free Ministry of Education curriculum resources. It does not upload or redistribute commercial copyrighted textbooks without permission. Where an official downloadable resource exists, the official source is used.
-    </div>
-  </div>
-</section>
-
-<section id="media" class="section alt">
-  <div class="container">
-    <p class="eyebrow dark">SCHOOL MEDIA</p>
-    <h2>Great Dormass in pictures & video</h2>
-    <p class="lead">The gallery uses publicly available school images and official/public school sources. Replace or expand these with your own school-approved photographs and videos.</p>
-    <div class="gallery">
-      <figure><img src="https://www.dormaashs.com/assets/images/front.jpg" alt="Dormaa SHS entrance"><figcaption>Great Dormass entrance</figcaption></figure>
-      <figure><img src="https://www.dormaashs.com/assets/images/dormassAca.jpg" alt="Dormass Football Academy"><figcaption>Dormass Football Academy</figcaption></figure>
-      <figure><img src="https://www.dormaashs.com/assets/images/NSMQ.jpg" alt="Dormaa SHS students at quiz competition"><figcaption>Academic competition</figcaption></figure>
-      <figure><img src="https://www.schoolsingh.com/senior-high-schools/images/dormaa-senior-high/dormaa-senior-high-students.jpg" alt="Dormaa Senior High students"><figcaption>Students on campus</figcaption></figure>
-    </div>
-    <div class="video-grid">
-      <a class="video-card" href="https://www.youtube.com/results?search_query=Dormaa+SHS+Great+Dormass" target="_blank" rel="noopener"><span>▶</span><div><b>Great Dormass videos</b><small>Open school video results on YouTube</small></div></a>
-      <a class="video-card" href="https://dormasstv.video.blog/2022/02/05/dormaa-senior-high-school/" target="_blank" rel="noopener"><span>▶</span><div><b>Dormass TV</b><small>School photos, information and media</small></div></a>
-      <a class="video-card" href="https://www.dormaashs.com/" target="_blank" rel="noopener"><span>▶</span><div><b>Official school site</b><small>School notices and published media</small></div></a>
-    </div>
-  </div>
-</section>
-
-<section id="admissions" class="section">
-  <div class="container callout">
-    <div>
-      <p class="eyebrow dark">ADMISSIONS</p>
-      <h2>Start your Great Dormass journey.</h2>
-      <p>The official school website provides an admission/enrolment route for students placed at Dormaa SHS. Follow the official instructions before submitting information.</p>
-    </div>
-    <a class="btn primary" href="https://www.dormaashs.com/" target="_blank" rel="noopener">Official Admission Page</a>
-  </div>
-</section>
-
-<section id="contact" class="section dark-section">
-  <div class="container contact-grid">
-    <div>
-      <p class="eyebrow">CONTACT GREAT DORMASS</p>
-      <h2>Stay connected.</h2>
-      <p>P. O. Box 39, Dormaa Ahenkro, Bono Region, Ghana</p>
-      <p>Phone: +233 246 799 534<br>Email: greatdormass@gmail.com</p>
-    </div>
-    <div class="creator">
-      <small>WEBSITE CREATOR</small>
-      <strong>Justice Amoh</strong>
-      <p>Designed and developed as a digital learning and school-information portal for the Great Dormass community.</p>
-    </div>
-  </div>
-</section>
-<section id="profile" class="section profile-screen">
-  <div class="container">
-    <div class="profile-header">
-      <div class="profile-avatar" id="profileAvatar">JD</div>
-      <div><p class="eyebrow dark">STUDENT PROFILE</p><h2 id="profileName">Student</h2><p id="profileEmail" class="lead">student@example.com</p></div>
-    </div>
-    <div class="profile-grid">
-      <div class="profile-card"><span>Student name</span><strong id="profileNameCard">—</strong></div>
-      <div class="profile-card"><span>Email</span><strong id="profileEmailCard">—</strong></div>
-      <div class="profile-card"><span>Class / Level</span><strong id="profileClass">Not set</strong></div>
-      <div class="profile-card"><span>Programme</span><strong id="profileProgramme">Not set</strong></div>
-    </div>
-    <div class="profile-actions"><button class="btn primary" data-screen="library">Open My Library</button><button class="btn ghost" id="profileLogout">Log out</button></div>
-  </div>
-</section>
-</main>
-
-
-<footer>
-  <div class="container footer">
-    <span>© <span id="year"></span> Great Dormass Digital Portal</span>
-    <span>Created by <b>Justice Amoh</b></span>
-  </div>
-</footer>
-
-<!-- Student Login -->
-<div class="auth-overlay" id="authOverlay" aria-hidden="true">
-  <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-    <button class="auth-close" id="authClose" aria-label="Close">×</button>
-    <div class="auth-logo"><img src="https://sis.uniflowtechnologies.com/school_logos/20231114042440.png" alt="Great Dormass logo"></div>
-    <p class="eyebrow dark">GREAT DORMASS STUDENT PORTAL</p>
-    <h2 id="authTitle">Student Login</h2>
-    <p class="auth-sub">Sign in to access your student portal and learning resources.</p>
-    <div class="auth-tabs">
-      <button class="auth-tab active" data-auth="login">Login</button>
-      <button class="auth-tab" data-auth="signup">Create account</button>
-    </div>
-    <form id="authForm">
-      <label for="authName" id="authNameLabel" class="hidden">Full name</label>
-      <input id="authName" class="auth-input hidden" type="text" autocomplete="name" placeholder="Full name">
-      <label for="authEmail">Email address</label>
-      <input id="authEmail" class="auth-input" type="email" autocomplete="email" placeholder="student@example.com" required>
-      <label for="authPassword">Password</label>
-      <input id="authPassword" class="auth-input" type="password" minlength="6" autocomplete="current-password" placeholder="At least 6 characters" required>
-      <button class="btn primary auth-submit" type="submit" id="authSubmit">Login to Great Dormass</button>
-    </form>
-    <p class="auth-note">Demo login stores your account only in this browser. For a secure school-wide login that works on every device, connect this portal to Firebase or Supabase.</p>
-    <div class="auth-message" id="authMessage" role="status"></div>
-  </div>
+<div class="app">
+<header class="top"><div class="brand"><div class="logo">GD</div><div><b>GREAT DORMASS</b><small>Student Website</small></div></div><div class="profile" id="profileName">Student</div></header>
+<div class="main">
+<aside class="side"><div class="nav">
+<button class="active" data-screen="home">Home</button><button data-screen="academics">Academics</button><button data-screen="library">Digital Library</button><button data-screen="profile">My Profile</button>
+</div></aside>
+<main class="content">
+<section class="screen active" id="home"><div class="hero"><small style="color:var(--gold);letter-spacing:.2em;font-weight:900">KNOWLEDGE IS POWER</small><h1>Welcome to <span>Great Dormass</span></h1><p>Your student platform for school information, academic resources, digital library access and Justice AI assistance.</p><div class="cards"><div class="card"><b>Digital Library</b><p class="muted">Access learning resources for your studies.</p></div><div class="card"><b>Justice AI</b><p class="muted">Tap the floating AI profile to ask questions.</p></div><div class="card"><b>Student Profile</b><p class="muted">Your login stays on this device.</p></div></div></div></section>
+<section class="screen" id="academics"><h2>Academics</h2><p class="muted">Programmes, subjects, notes and study resources.</p></section>
+<section class="screen" id="library"><h2>Digital Library</h2><p class="muted">Year 1, Year 2 and Year 3 learning resources can be connected here.</p></section>
+<section class="screen" id="profile"><h2>My Profile</h2><p id="profileDetails" class="muted"></p><button class="btn" onclick="logout()">Log out</button></section>
+</main></div>
 </div>
 
-<button class="justice-fab" id="justiceFab" aria-label="Open Justice AI" aria-expanded="false">
-  <span class="justice-bot-head" aria-hidden="true"><span class="bot-eye left"></span><span class="bot-eye right"></span><span class="bot-smile"></span></span>
-  <span class="justice-fab-label">Justice AI</span>
-</button>
-<div class="justice-panel" id="justicePanel" aria-hidden="true">
-  <div class="justice-panel-head">
-    <div class="justice-avatar"><span class="justice-bot-head small"><span class="bot-eye left"></span><span class="bot-eye right"></span><span class="bot-smile"></span></span></div>
-    <div><strong>Justice AI</strong><small>Great Dormass Student Assistant</small></div>
-    <button id="justiceClose" aria-label="Close Justice AI">×</button>
-  </div>
-  <div class="justice-welcome">Hello! 👋 I’m <b>Justice AI</b>. Ask me about Great Dormass, academics, the library, programmes, school information, or how to use this portal.</div>
-  <div class="justice-chips"><button data-ask="What programmes does Great Dormass offer?">Programmes</button><button data-ask="How do I use the digital library?">Library</button><button data-ask="Tell me about Great Dormass.">About school</button></div>
-  <div class="justice-chat" id="justiceChat"></div>
-  <form class="justice-form" id="justiceForm"><input id="justiceInput" autocomplete="off" placeholder="Ask Justice AI…" aria-label="Ask Justice AI"><button type="submit">Send</button></form>
+<button class="ai-fab" id="openAI" aria-label="Open Justice AI"><img src="justice-ai-profile.jpg" alt="Justice AI"></button>
+
+<div class="login" id="login">
+<div class="login-card"><h2>Welcome to Great Dormass</h2><p class="muted">Enter your name to continue. <b>No password is required.</b></p><input id="studentName" placeholder="Student full name" autocomplete="name"><input id="studentEmail" placeholder="Email (optional)" type="email" autocomplete="email"><button class="btn primary" id="continue">Continue</button></div>
 </div>
 
-<div class="screen-controls" aria-label="Screen navigation"><button id="backScreen">← Back</button><span id="screenIndicator">1 / 8</span><button id="nextScreen">Next →</button></div>
-<script src="app.js"></script>
+<section class="chat" id="chat">
+<header class="chat-head"><img src="justice-ai-profile.jpg" alt="Justice AI"><div class="chat-title"><b>Justice AI</b><span class="online">● Online</span></div><button class="icon-btn" id="historyBtn">☰ History</button><button class="icon-btn" id="newChat">＋</button><button class="icon-btn" id="closeAI">✕</button></header>
+<div class="history" id="history"></div>
+<div class="messages" id="messages"></div>
+<div class="composer"><div class="composer-inner"><input class="gallery" id="gallery" type="file" accept="image/*" multiple><button class="icon-btn" id="galleryBtn" title="Choose photos">📷</button><button class="icon-btn voice" id="voiceBtn" title="Voice chat">🎙️</button><textarea id="input" placeholder="Message Justice AI…"></textarea><button class="send" id="send">Send</button></div></div>
+</section>
+
+<script>
+const $=s=>document.querySelector(s);
+let user=JSON.parse(localStorage.getItem("gdStudent")||"null");
+let chats=JSON.parse(localStorage.getItem("gdChats")||"[]");
+let current=JSON.parse(localStorage.getItem("gdCurrentChat")||"null");
+if(!current){current={id:crypto.randomUUID(),title:"New chat",messages:[]};}
+function save(){localStorage.setItem("gdChats",JSON.stringify(chats));localStorage.setItem("gdCurrentChat",JSON.stringify(current));}
+function showUser(){if(user){$("#login").style.display="none";$("#profileName").textContent=user.name;$("#profileDetails").textContent=`Name: ${user.name}${user.email?" • Email: "+user.email:""} • Password: not required`;}}
+showUser();
+$("#continue").onclick=()=>{const name=$("#studentName").value.trim();if(!name)return alert("Enter your name.");user={name,email:$("#studentEmail").value.trim()};localStorage.setItem("gdStudent",JSON.stringify(user));showUser();};
+function render(){const box=$("#messages");box.innerHTML="";if(!current.messages.length){box.innerHTML='<div class="msg ai">Hello! I’m Justice AI for Great Dormass. Ask me about school information, subjects, studying, the library or anything you need help with.</div>';return}for(const m of current.messages){const d=document.createElement("div");d.className="msg "+(m.role==="user"?"me":"ai");d.textContent=m.text;box.appendChild(d)}box.scrollTop=box.scrollHeight;}
+function renderHistory(){const h=$("#history");h.innerHTML="<h3>Chat history</h3>";for(const c of chats.slice().reverse()){const row=document.createElement("div");row.className="history-item";row.textContent=c.title||"Chat";const del=document.createElement("button");del.textContent="🗑";del.onclick=(e)=>{e.stopPropagation();chats=chats.filter(x=>x.id!==c.id);save();renderHistory()};row.appendChild(del);row.onclick=()=>{current=JSON.parse(JSON.stringify(c));save();render();$("#history").classList.remove("open")};h.appendChild(row)}}
+$("#openAI").onclick=()=>{$("#chat").classList.add("open");render();};
+$("#closeAI").onclick=()=>$("#chat").classList.remove("open");
+$("#historyBtn").onclick=()=>{$("#history").classList.toggle("open");renderHistory()};
+$("#newChat").onclick=()=>{if(current.messages.length){chats.push(current);};current={id:crypto.randomUUID(),title:"New chat",messages:[]};save();render();renderHistory()};
+$("#send").onclick=send;
+$("#input").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send()}});
+function send(){const text=$("#input").value.trim();if(!text)return;current.messages.push({role:"user",text});if(current.title==="New chat")current.title=text.slice(0,42);$("#input").value="";const lower=text.toLowerCase();let reply="I’m Justice AI. I can help you with Great Dormass, school information, study planning and your digital learning resources.";if(lower.includes("hello")||lower.includes("hi"))reply="Hello! Welcome to Great Dormass. How can I help you today?";else if(lower.includes("library")||lower.includes("book"))reply="I can help you find the Great Dormass digital library and learning resources. Tell me your year and subject.";else if(lower.includes("math"))reply="Sure. Send me the Mathematics question and I’ll work through it with you.";else if(lower.includes("science"))reply="Send your Science question, topic or photo of the question and I’ll help you study it.";setTimeout(()=>{current.messages.push({role:"assistant",text:reply});save();render();},350);save();render();}
+$("#galleryBtn").onclick=()=>$("#gallery").click();
+$("#gallery").onchange=()=>{if($("#gallery").files.length)$("#input").value+=" [Photo attached: "+$("#gallery").files[0].name+"]";};
+let recognition;
+if("webkitSpeechRecognition" in window || "SpeechRecognition" in window){const R=window.SpeechRecognition||window.webkitSpeechRecognition;recognition=new R();recognition.continuous=false;recognition.interimResults=false;recognition.lang="en-GH";recognition.onresult=e=>{$("#input").value+=(($("#input").value?" ":"")+e.results[0][0].transcript)};recognition.onend=()=>$("#voiceBtn").classList.remove("on");}
+$("#voiceBtn").onclick=()=>{if(!recognition){alert("Voice chat is not supported by this browser.");return}$("#voiceBtn").classList.add("on");recognition.start();};
+function logout(){localStorage.removeItem("gdStudent");location.reload();}
+render();
+</script>
 </body>
 </html>
